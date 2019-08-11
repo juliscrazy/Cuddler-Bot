@@ -27,10 +27,7 @@ async def on_message(message):
         return
 
     if message.content.startswith('!'):
-        try:
-            getattr(CommandSelector, message.content.split()[0][1:])(message)
-        except AttributeError:
-            CommandSelector.help(message)
+        await getattr(CommandSelector, message.content.split()[0][1:], "help")(message)
 
 @client.event
 async def on_member_join(member):
