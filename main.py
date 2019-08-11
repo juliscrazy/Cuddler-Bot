@@ -1,7 +1,9 @@
-import os
 import json
 import logging
+import os
+from commands.commandhandler import CommandSelector
 
+from aiohttp import client_exceptions
 import discord
 
 logging.basicConfig(format='%(asctime)s - %(levelname)s: %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
@@ -24,14 +26,22 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if message.content.startswith('$hello'):
-        await message.channel.send('Hello!')
+    if message.content.startswith('!'):
+        try:
+            getattr(CommandSelector, message.content.split()[0][1:])(message)
+        except AttributeError:
+            CommandSelector.help(message)
 
 @client.event
 async def on_member_join(member):
+    # Welcome message
     await member.guild.system_channel.send('{0.mention} felt cute.'.format(member))
-    log.info('{0.mention} felt cute.'.format(member))
+    log.info('{0.mention} joined the server.'.format(member))
+
 if __name__ == "__main__":
-    log.info('Running bot')
+    log.info('Starting up bot')
     with open('auth.json') as auth:
-        client.run(json.load(auth)['TOKEN'])
+        try:
+            client.run(json.load(auth)['TOKEN'])
+        except client_exceptions.ClientConnectorError:
+            log.error("No connection to discordapp.com available.")
