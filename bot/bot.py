@@ -38,7 +38,7 @@ async def on_member_join(member):
     await member.guild.system_channel.send('{0.mention} felt cute.'.format(member))
     log.info('{0.mention} joined the server.'.format(member))
 
-def run()
+def run():
     log.info('Starting up bot')
     with open('auth.json') as auth:
         try:
