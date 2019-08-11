@@ -1,7 +1,7 @@
 import json
 import logging
 import os
-from bot.commands.commandhandler import CommandSelector
+from bot.commands import commandhandler
 
 from aiohttp import client_exceptions
 import discord
@@ -19,6 +19,8 @@ client = discord.Client()
 
 @client.event
 async def on_ready():
+    global CommandSelector
+    CommandSelector = commandhandler.commandSelector()
     log.info('{0.user} is logged in and online.'.format(client))
 
 @client.event
@@ -27,7 +29,8 @@ async def on_message(message):
         return
 
     if message.content.startswith('!'):
-        await getattr(CommandSelector, message.content.split()[0][1:], "help")(message)
+        command = message.content.split()[0][1:]
+        await getattr(CommandSelector, command)(message)
 
 @client.event
 async def on_member_join(member):

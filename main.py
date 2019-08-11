@@ -1,3 +1,3 @@
-from bot import bot
+from bot import botmain
 
-bot.run()
+botmain.run()

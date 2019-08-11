@@ -2,7 +2,7 @@
 from bot.commands import cmd_clear, cmd_help
 
 class commandSelector:
-    async def __init__(self, message):
+    def __init__(self):
         pass
 
     async def clear(self, message):
@@ -12,5 +12,3 @@ class commandSelector:
     async def help(self, message):
         """Sends help text in invoke channel."""
         await cmd_help.run(message)
-
-CommandSelector = commandSelector

@@ -1,2 +1,2 @@
 async def run(message):
-    message.channel.send("Hello, I am stupid")
+    await message.channel.send("Hello, I am stupid")
