@@ -40,7 +40,7 @@ async def on_member_join(member):
 
 def run():
     log.info('Starting up bot')
-    with open("/home/pi/Documents/Apps/Cudler-Bot/auth.json") as auth:
+    with open("./auth.json") as auth:
         try:
             client.run(json.load(auth)['TOKEN'])
         except client_exceptions.ClientConnectorError:
