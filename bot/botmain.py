@@ -15,24 +15,24 @@ for loggers in logging.Logger.manager.loggerDict:
     else:
         pass
 
-client = discord.Client()
+bot = discord.Client()
 
-@client.event
+@bot.event
 async def on_ready():
     global CommandSelector
     CommandSelector = commandhandler.commandSelector()
-    log.info('{0.user} is logged in and online.'.format(client))
+    log.info('{0.user} is logged in and online.'.format(bot))
 
-@client.event
+@bot.event
 async def on_message(message):
-    if message.author == client.user:
+    if message.author == bot.user:
         return
 
     if message.content.startswith('!'):
         command = message.content.split()[0][1:]
         await getattr(CommandSelector, command)(message)
 
-@client.event
+@bot.event
 async def on_member_join(member):
     # Welcome message
     await member.guild.system_channel.send('{0.mention} felt cute.'.format(member))
@@ -43,6 +43,6 @@ def run():
     print(os.getcwd())
     with open("auth.json") as auth:
         try:
-            client.run(json.load(auth)['TOKEN'])
+            bot.run(json.load(auth)['TOKEN'])
         except client_exceptions.ClientConnectorError:
             log.error("No connection to discordapp.com available.")
