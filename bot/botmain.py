@@ -40,6 +40,7 @@ async def on_member_join(member):
 
 def run():
     log.info('Starting up bot')
+    print(os.getcwd())
     with open("~/auth.json") as auth:
         try:
             client.run(json.load(auth)['TOKEN'])
