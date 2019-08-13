@@ -20,11 +20,6 @@ def startFlask():
 
 def startDiscord():
     log.info('Starting bot')
-    with open("auth.json") as auth:
-        try:
-            bot.run(json.load(auth)['TOKEN'])
-        except client_exceptions.ClientConnectorError:
-            log.error("No connection to discordapp.com available.")
 
 
 if __name__ == "__main__":
@@ -46,3 +41,9 @@ if __name__ == "__main__":
     discord_thread = Thread(target=startDiscord)
     discord_thread.start()
     log.info('Started discord thread')
+
+    with open("auth.json") as auth:
+        try:
+            bot.run(json.load(auth)['TOKEN'])
+        except client_exceptions.ClientConnectorError:
+            log.error("No connection to discordapp.com available.")
