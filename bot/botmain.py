@@ -1,10 +1,11 @@
 import json
 import logging
 import os
-from bot.commands import commandhandler
 
-from aiohttp import client_exceptions
 import discord
+from aiohttp import client_exceptions
+
+from bot.commands import commandhandler
 
 logging.basicConfig(format='%(asctime)s - %(levelname)s: %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
 log = logging.getLogger('cuddler-logger')
