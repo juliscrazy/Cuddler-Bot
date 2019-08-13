@@ -1,4 +1,14 @@
 #!/usr/bin/python3.7
-from bot import botmain
+import multiprocessing
+import time
 
-botmain.run()
+from bot import botmain
+from webinterface import interfacehandler
+
+if __name__ == "__main__":
+    multiprocessing.set_start_method("fork")
+    botpipe, interfacepipe = multiprocessing.Pipe()
+    botprocess = multiprocessing.Process(target=botmain.run, args=(botpipe,))
+    interfaceprocess = multiprocessing.Process(target=interfacehandler.run, args=(interfacepipe,))
+    interfaceprocess.start()
+    botprocess.start()
