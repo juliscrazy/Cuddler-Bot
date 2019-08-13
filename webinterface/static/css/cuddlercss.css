@@ -11,6 +11,6 @@ button {
 svg {
     stroke: #a666ff;
 }
-a {
+a, a:hover {
     color: #a666ff;
 }
