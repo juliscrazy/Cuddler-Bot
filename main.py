@@ -1,14 +1,47 @@
 #!/usr/bin/python3.7
-import multiprocessing
-import time
+import json
+from bot import bothandler
+from webinterface.interfacehandler import *
 
-from bot import botmain
-from webinterface import interfacehandler
+from flask import Flask 
+
+from threading import Thread
+import discord
+import asyncio
+import logging
+
+bot = bothandler.Cuddler()
+
+def startFlask():
+    log.info('Starting flask')
+    with open("ip.json") as ip:
+        app.run(host=json.load(ip)['hostip'])
+
+def startDiscord():
+    log.info('Starting bot')
+    with open("auth.json") as auth:
+        try:
+            bot.run(json.load(auth)['TOKEN'])
+        except client_exceptions.ClientConnectorError:
+            log.error("No connection to discordapp.com available.")
+
 
 if __name__ == "__main__":
-    multiprocessing.set_start_method("fork")
-    botpipe, interfacepipe = multiprocessing.Pipe()
-    botprocess = multiprocessing.Process(target=botmain.run, args=(botpipe,))
-    interfaceprocess = multiprocessing.Process(target=interfacehandler.run, args=(interfacepipe,))
-    interfaceprocess.start()
-    botprocess.start()
+    logging.basicConfig(format='%(asctime)s - %(levelname)s: %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
+    log = logging.getLogger('cuddler-logger')
+    allowedloggers = ['cuddler-logger']
+    for loggers in logging.Logger.manager.loggerDict:
+        if loggers not in allowedloggers:
+            logging.getLogger(loggers).disabled = True
+        else:
+            pass
+
+    flask_thread = Thread(target=startFlask)
+    flask_thread.start()
+    log.info('Started flask thread')
+    
+    bot.passmesomestuff(bot, log)
+
+    discord_thread = Thread(target=startDiscord)
+    discord_thread.start()
+    log.info('Started discord thread')
