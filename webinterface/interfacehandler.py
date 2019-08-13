@@ -4,12 +4,18 @@ import os
 import flask
 
 app = flask.Flask(__name__)
+pipe = None
 
 @app.route("/")
 def index():
-    print(os.getcwd())
-    return flask.render_template("index.html")
+    return flask.render_template("dashboard.html")
 
-def run():
+@app.route("/reports/")
+def reports():
+    return flask.render_template("reports.html")
+
+def run(mainpipe):
+    global pipe
+    pipe = mainpipe
     with open("ip.json") as ip:
         app.run(host=json.load(ip)['hostip'])

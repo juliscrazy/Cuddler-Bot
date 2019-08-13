@@ -15,7 +15,7 @@ for loggers in logging.Logger.manager.loggerDict:
         logging.getLogger(loggers).disabled = True
     else:
         pass
-
+pipe = None
 bot = discord.Client()
 
 @bot.event
@@ -39,7 +39,9 @@ async def on_member_join(member):
     await member.guild.system_channel.send('{0.mention} felt cute.'.format(member))
     log.info('{0.mention} joined the server.'.format(member))
 
-def run():
+def run(mainpipe):
+    global pipe
+    pipe = mainpipe
     log.info('Starting up bot')
     print(os.getcwd())
     with open("auth.json") as auth:
