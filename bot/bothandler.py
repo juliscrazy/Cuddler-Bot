@@ -27,3 +27,12 @@ class Cuddler(discord.Client):
         # Welcome message
         await member.guild.system_channel.send('{0.mention} felt cute.'.format(member))
         self.log.info('{0.mention} joined the server.'.format(member))
+
+    def run():
+        self.log.info('Starting bot')
+
+        with open("auth.json") as auth:
+        try:
+            self.bot.run(json.load(auth)['TOKEN'])
+        except client_exceptions.ClientConnectorError:
+            log.error("No connection to discordapp.com available.")

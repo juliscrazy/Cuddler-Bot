@@ -38,10 +38,6 @@ if __name__ == "__main__":
     # discord_thread.start()
     # log.info('Started discord thread')
 
-    log.info('Starting bot')
+    bot.run()
 
-    with open("auth.json") as auth:
-        try:
-            bot.run(json.load(auth)['TOKEN'])
-        except client_exceptions.ClientConnectorError:
-            log.error("No connection to discordapp.com available.")
+    

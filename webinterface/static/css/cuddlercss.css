@@ -8,3 +8,9 @@ body {
 button {
     padding: 10px;
 }
+svg {
+    stroke: #42f595;
+}
+span {
+    color: #42f595;
+}
