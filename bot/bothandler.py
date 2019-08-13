@@ -29,7 +29,7 @@ class Cuddler(discord.Client):
         await member.guild.system_channel.send('{0.mention} felt cute.'.format(member))
         self.log.info('{0.mention} joined the server.'.format(member))
 
-    def start(self):
+    def startbot(self):
         self.log.info('Starting bot')
 
         with open("auth.json") as auth:

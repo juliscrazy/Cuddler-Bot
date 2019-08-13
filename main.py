@@ -2,7 +2,6 @@
 import json
 from bot import bothandler
 from webinterface.interfacehandler import *
-from aiohttp import client_exceptions
 
 from flask import Flask 
 
@@ -38,4 +37,4 @@ if __name__ == "__main__":
     # discord_thread.start()
     # log.info('Started discord thread')
 
-    bot.start()
+    bot.startbot()
