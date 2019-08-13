@@ -38,6 +38,6 @@ if __name__ == "__main__":
     # discord_thread.start()
     # log.info('Started discord thread')
 
-    bot.run()
+bot.run()
 
     
