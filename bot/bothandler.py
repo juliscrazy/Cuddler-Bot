@@ -2,7 +2,6 @@ import json
 import os
 
 import discord
-from aiohttp import client_exceptions
 
 from bot.commands import commandhandler
 

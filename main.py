@@ -2,6 +2,7 @@
 import json
 from bot import bothandler
 from webinterface.interfacehandler import *
+from aiohttp import client_exceptions
 
 from flask import Flask 
 
