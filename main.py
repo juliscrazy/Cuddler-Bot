@@ -18,10 +18,6 @@ def startFlask():
     with open("ip.json") as ip:
         app.run(host=json.load(ip)['hostip'])
 
-def startDiscord():
-    
-
-
 if __name__ == "__main__":
     logging.basicConfig(format='%(asctime)s - %(levelname)s: %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
     log = logging.getLogger('cuddler-logger')
