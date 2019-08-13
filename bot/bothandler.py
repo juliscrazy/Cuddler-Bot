@@ -32,7 +32,7 @@ class Cuddler(discord.Client):
         self.log.info('Starting bot')
 
         with open("auth.json") as auth:
-        try:
-            self.bot.run(json.load(auth)['TOKEN'])
-        except client_exceptions.ClientConnectorError:
-            log.error("No connection to discordapp.com available.")
+            try:
+                self.bot.run(json.load(auth)['TOKEN'])
+            except client_exceptions.ClientConnectorError:
+                log.error("No connection to discordapp.com available.")
