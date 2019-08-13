@@ -4,6 +4,7 @@ import os
 import discord
 
 from bot.commands import commandhandler
+from aiohttp import client_exceptions
 
 class Cuddler(discord.Client):
     def passmesomestuff(self, bot, logger):
