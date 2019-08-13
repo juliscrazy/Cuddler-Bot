@@ -19,7 +19,7 @@ def startFlask():
         app.run(host=json.load(ip)['hostip'])
 
 def startDiscord():
-    log.info('Starting bot')
+    
 
 
 if __name__ == "__main__":
@@ -38,9 +38,11 @@ if __name__ == "__main__":
     
     bot.passmesomestuff(bot, log)
 
-    discord_thread = Thread(target=startDiscord)
-    discord_thread.start()
-    log.info('Started discord thread')
+    # discord_thread = Thread(target=startDiscord)
+    # discord_thread.start()
+    # log.info('Started discord thread')
+
+    log.info('Starting bot')
 
     with open("auth.json") as auth:
         try:
