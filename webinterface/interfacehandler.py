@@ -11,7 +11,7 @@ def index():
     return flask.render_template("dashboard.html")
 
 @app.route("/servers/")
-def Servers():
+def servers():
     return flask.render_template("servers.html")
 
 @app.route("/stats/")
