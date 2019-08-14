@@ -7,8 +7,10 @@ from bot.commands import commandhandler
 from aiohttp import client_exceptions
 
 class Cuddler(discord.Client):
-    def passmesomestuff(self, bot, logger):
+    def bindbot(self, bot):
         self.bot = bot
+
+    def bindlog(self, logger):
         self.log = logger
 
     async def on_ready(self):
@@ -36,4 +38,4 @@ class Cuddler(discord.Client):
             try:
                 self.bot.run(json.load(auth)['TOKEN'])
             except client_exceptions.ClientConnectorError:
-                log.error("No connection to discordapp.com available.")
+                self.log.error("No connection to discordapp.com available.")
