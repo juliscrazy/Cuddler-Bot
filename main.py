@@ -1,7 +1,7 @@
 #!/usr/bin/python3.7
 import json
 from bot import bothandler
-from webinterface.interfacehandler import FlaskService
+from webinterface.interfacehandler import *
 
 from flask import Flask 
 
@@ -10,8 +10,14 @@ import discord
 import asyncio
 import logging
 
-if __name__ == "__main__":
+bot = bothandler.Cuddler()
 
+def startFlask():
+    log.info('Starting flask')
+    with open("ip.json") as ip:
+        app.run(host=json.load(ip)['hostip'])
+
+if __name__ == "__main__":
     logging.basicConfig(format='%(asctime)s - %(levelname)s: %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
     log = logging.getLogger('cuddler-logger')
     allowedloggers = ['cuddler-logger']
@@ -21,14 +27,14 @@ if __name__ == "__main__":
         else:
             pass
 
-    bot = bothandler.Cuddler()
-    service = FlaskService(bot, log)
-
-    flask_thread = Thread(target=service.run)
+    flask_thread = Thread(target=startFlask)
     flask_thread.start()
     log.info('Started flask thread')
     
-    bot.bindbot(bot)
-    bot.bindlog(log)
+    bot.passmesomestuff(bot, log)
+
+    # discord_thread = Thread(target=startDiscord)
+    # discord_thread.start()
+    # log.info('Started discord thread')
 
     bot.startbot()
