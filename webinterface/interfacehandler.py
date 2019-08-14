@@ -21,26 +21,24 @@ class FlaskService():
         for route in self.routes:
             self.app.add_url_rule(route["route"], route["page"], route["func"])
 
-    async def index(self):
-        await self.bot.get_channel(607236109621002252).send("test")
+    def index(self):
         return flask.render_template("dashboard.html")
 
-    async def servers(self):
+    def servers(self):
         return flask.render_template("servers.html")
 
-    async def stats(self):
+    def stats(self):
         return flask.render_template("stats.html")
 
-    async def integrations(self):
+    def integrations(self):
         return flask.render_template("integrations.html")
 
-    async def logs(self):
+    def logs(self):
         return flask.render_template("logs.html")
+        self.bot.logout()
+        self.log.info("lul")
 
     def run(self):
         self.log.info('Starting flask')
         with open("ip.json") as ip:
             self.app.run(host=json.load(ip)['hostip'])
-
-    async def test(self):
-        await self.bot.get_channel(607236109621002252).send("test")
