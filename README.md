@@ -1,2 +1,5 @@
-# Cuddler Bot
- another python discord bot
+# Dumb outdated discord bot
+
+probably doesn't work anymore
+horrible architecture
+don't use
